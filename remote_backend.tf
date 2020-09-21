@@ -1,3 +1,4 @@
+# Remote backend configuration
 terraform {
   backend "remote" {
     hostname = "app.terraform.io"
