@@ -13,7 +13,9 @@ resource "aws_vpc" "hashicat" {
 }
 
 resource "aws_subnet" "hashicat" {
-  vpc_id     = aws_vpc.hashicat.id
+  #vpc_id     = module.vpc.aws_vpc.hashicat.id
+  vpc_id = module.vpc.vpc_id
+  
   cidr_block = var.subnet_prefix
 
   tags = {
