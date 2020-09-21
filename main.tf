@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 #resource "aws_vpc" "hashicat" {
-module "vpc" {
+resource "aws_vpc" "hashicat" {
   source  = "app.terraform.io/tsshivakumar-training/vpc/aws"
   version = "2.51.0" 
   cidr_block           = var.address_space
