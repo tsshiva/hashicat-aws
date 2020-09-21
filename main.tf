@@ -7,7 +7,7 @@ provider "aws" {
 module "vpc" {
   source  = "app.terraform.io/tsshivakumar-training/vpc/aws"
   version = "2.51.0" 
-  cidr = var.address_space
+  cidr_block           = var.address_space
   enable_dns_hostnames = true
 
   tags = {
@@ -16,8 +16,7 @@ module "vpc" {
 }
 
 resource "aws_subnet" "hashicat" {
-  #vpc_id     = aws_vpc.hashicat.id
-  vpc_id = module.vpc.vpc_id
+  vpc_id     = aws_vpc.hashicat.id
   cidr_block = var.subnet_prefix
 
   tags = {
@@ -28,8 +27,7 @@ resource "aws_subnet" "hashicat" {
 resource "aws_security_group" "hashicat" {
   name = "${var.prefix}-security-group"
 
-  #vpc_id = aws_vpc.hashicat.id
-  vpc_id = module.vpc.vpc_id
+  vpc_id = aws_vpc.hashicat.id
 
   ingress {
     from_port   = 22
@@ -71,8 +69,7 @@ resource "random_id" "app-server-id" {
 }
 
 resource "aws_internet_gateway" "hashicat" {
-  #vpc_id = aws_vpc.hashicat.id
-  vpc_id = module.vpc.vpc_id
+  vpc_id = aws_vpc.hashicat.id
 
   tags = {
     Name = "${var.prefix}-internet-gateway"
@@ -80,8 +77,7 @@ resource "aws_internet_gateway" "hashicat" {
 }
 
 resource "aws_route_table" "hashicat" {
-  #vpc_id = aws_vpc.hashicat.id
-  vpc_id = module.vpc.vpc_id
+  vpc_id = aws_vpc.hashicat.id
 
   route {
     cidr_block = "0.0.0.0/0"
